@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero d-flex align-items-center">
+    <div class="container text-center">
+        <h1 class="display-4">I create customized digital solutions for all your needs</h1>
+        <p class="lead mt-3">Elegant, royal, and tailored just for you.</p>
+        <a href="{{ url_for('portfolio') }}" class="btn btn-gold btn-lg mt-4">View My Work</a>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="services py-5">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Our Services</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center p-4">
+                    <i class="fas fa-video fa-3x mb-3 text-gold"></i>
+                    <h5>Video Editing</h5>
+                    <p>Events, promos, social media</p>
+                    <p class="price">₹250+</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center p-4">
+                    <i class="fas fa-envelope-open-text fa-3x mb-3 text-gold"></i>
+                    <h5>Event & Digital Cards</h5>
+                    <p>Weddings, birthdays, all occasions</p>
+                    <p class="price">₹200 / ₹250</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center p-4">
+                    <i class="fas fa-image fa-3x mb-3 text-gold"></i>
+                    <h5>Posters & Visiting Cards</h5>
+                    <p>Business branding</p>
+                    <p class="price">₹200</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center p-4">
+                    <i class="fas fa-chart-line fa-3x mb-3 text-gold"></i>
+                    <h5>Digital Marketing</h5>
+                    <p>Ads & online growth</p>
+                    <p class="price">Custom packages</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Portfolio -->
+{% if featured %}
+<section class="featured-portfolio py-5 bg-dark-royal">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Featured Work</h2>
+        <div class="row g-4">
+            {% for item in featured %}
+            <div class="col-md-4">
+                <div class="card portfolio-card">
+                    <img src="{{ url_for('static', filename='uploads/' + item.image_file) }}" class="card-img-top" alt="{{ item.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.title }}</h5>
+                        <p class="card-text">{{ item.description[:100] }}...</p>
+                        <a href="{{ url_for('portfolio_item', id=item.id) }}" class="btn btn-gold btn-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Contact / CTA -->
+<section class="contact-cta py-5">
+    <div class="container text-center">
+        <h2 class="section-title">Let's Create Something Royal Together</h2>
+        <p class="mt-3">Call or email me directly:</p>
+        <p class="contact-info">
+            <i class="fas fa-phone-alt me-2"></i>9579227943<br>
+            <i class="fas fa-envelope me-2"></i>gouravkumawat911@gmail.com
+        </p>
+        <a href="{{ url_for('feedback') }}" class="btn btn-gold btn-lg mt-3">Leave Feedback</a>
+    </div>
+</section>
+{% endblock %}

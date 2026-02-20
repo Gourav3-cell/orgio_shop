@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="section-title text-center mb-5">My Portfolio</h1>
+    <div class="row g-4">
+        {% for item in items %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card portfolio-card h-100">
+                <img src="{{ url_for('static', filename='uploads/' + item.image_file) }}" class="card-img-top" alt="{{ item.title }}">
+                <div class="card-body">
+                    <span class="badge bg-gold mb-2">{{ item.category }}</span>
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p class="card-text">{{ item.description[:150] }}...</p>
+                    <a href="{{ url_for('portfolio_item', id=item.id) }}" class="btn btn-outline-gold btn-sm">View Details</a>
+                </div>
+                <div class="card-footer text-muted">
+                    <small>Added on {{ item.date_created.strftime('%d %b %Y') }}</small>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12 text-center">
+            <p>No portfolio items yet. Check back soon!</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

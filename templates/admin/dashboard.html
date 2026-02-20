@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="section-title mb-4">Admin Dashboard</h1>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="dashboard-card text-center p-4">
+                <i class="fas fa-images fa-3x text-gold mb-3"></i>
+                <h5>Manage Portfolio</h5>
+                <p>Add, edit or delete your work.</p>
+                <a href="{{ url_for('admin_portfolio') }}" class="btn btn-gold">Go</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="dashboard-card text-center p-4">
+                <i class="fas fa-comments fa-3x text-gold mb-3"></i>
+                <h5>Feedback</h5>
+                <p>View messages from visitors.</p>
+                <a href="{{ url_for('admin_feedback') }}" class="btn btn-gold">Go</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="dashboard-card text-center p-4">
+                <i class="fas fa-cog fa-3x text-gold mb-3"></i>
+                <h5>Settings</h5>
+                <p>Update your profile (coming soon).</p>
+                <a href="#" class="btn btn-gold disabled">Soon</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

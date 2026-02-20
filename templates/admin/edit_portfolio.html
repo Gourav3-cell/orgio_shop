@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="form-card p-5">
+                <h2 class="section-title text-center mb-4">{{ 'Edit' if item else 'Add New' }} Portfolio Item</h2>
+                <form method="POST" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3">
+                        {{ form.title.label(class="form-label") }}
+                        {{ form.title(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.category.label(class="form-label") }}
+                        {{ form.category(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.description.label(class="form-label") }}
+                        {{ form.description(class="form-control", rows=5) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.image.label(class="form-label") }}
+                        {{ form.image(class="form-control") }}
+                        {% if item and item.image_file %}
+                            <img src="{{ url_for('static', filename='uploads/' + item.image_file) }}" width="100" class="mt-2">
+                        {% endif %}
+                    </div>
+                    <div class="mb-4 form-check">
+                        {{ form.is_featured(class="form-check-input") }}
+                        {{ form.is_featured.label(class="form-check-label") }}
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-gold">Save</button>
+                        <a href="{{ url_for('admin_portfolio') }}" class="btn btn-outline-gold ms-2">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

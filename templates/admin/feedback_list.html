@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="section-title mb-4">Visitor Feedback</h1>
+    <div class="table-responsive">
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                    <th>Rating</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fb in feedbacks %}
+                <tr>
+                    <td>{{ fb.id }}</td>
+                    <td>{{ fb.name }}</td>
+                    <td>{{ fb.email or '—' }}</td>
+                    <td>{{ fb.message[:50] }}...</td>
+                    <td>
+                        {% if fb.rating %}
+                            {% for i in range(fb.rating) %}⭐{% endfor %}
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
+                    <td>{{ fb.date_submitted.strftime('%Y-%m-%d') }}</td>
+                    <td>
+                        <form action="{{ url_for('delete_feedback', id=fb.id) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this feedback?')"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7" class="text-center">No feedback yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

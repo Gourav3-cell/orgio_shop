@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="form-card p-5">
+                <h2 class="section-title text-center mb-4">Share Your Feedback</h2>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3">
+                        {{ form.name.label(class="form-label") }}
+                        {{ form.name(class="form-control") }}
+                        {% if form.name.errors %}
+                            <div class="text-danger">{{ form.name.errors[0] }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.email.label(class="form-label") }}
+                        {{ form.email(class="form-control") }}
+                        <small class="text-muted">Optional, if you'd like a reply</small>
+                    </div>
+                    <div class="mb-3">
+                        {{ form.message.label(class="form-label") }}
+                        {{ form.message(class="form-control", rows=5) }}
+                        {% if form.message.errors %}
+                            <div class="text-danger">{{ form.message.errors[0] }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-4">
+                        {{ form.rating.label(class="form-label") }}
+                        {{ form.rating(class="form-control", type="number", min=1, max=5) }}
+                        <small class="text-muted">Rate 1 to 5 (optional)</small>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-gold btn-lg">Submit Feedback</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
